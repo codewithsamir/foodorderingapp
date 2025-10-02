@@ -79,9 +79,10 @@ interface CustomInputProps {
     placeholder?: string;
     value?: string;
     onChangeText?: (text: string) => void;
-    label: string;
+    label?: string;
     secureTextEntry?: boolean;
     keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
+    icon?: React.ReactNode;
 }
 
 interface ProfileFieldProps {
