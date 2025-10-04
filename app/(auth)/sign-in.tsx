@@ -24,7 +24,7 @@ const SignIn = () => {
             await signIn({ email, password });
             Alert.alert("successfully login");
             fetchAuthenticatedUser()
-            router.replace('/(tabs)');
+            router.replace('/');
         } catch(error: any) {
             Alert.alert('Error', error.message);
             Sentry.captureEvent(error);

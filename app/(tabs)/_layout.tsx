@@ -6,8 +6,8 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 
 const TabBarIcon  = ({focused , icon , title}:TabBarIconProps) =>(
-  <View className='tab-icon' >
-    <Image source={icon} className={`size-7`} tintColor={focused ? "#fe8c00" : "#5d5f6d" } resizeMode="contain" />
+  <View className='tab-icon ' >
+    <Image source={icon} className={`size-7 ${icon.uri && "rounded-full"}`} tintColor={focused ? "#fe8c00" : "#5d5f6d" } resizeMode="contain" />
     <Text className={`text-sm ${focused ? 'text-primary' : 'text-gray-400'}`}>{title}</Text>
   </View>
 )
@@ -17,7 +17,8 @@ const TabBarIcon  = ({focused , icon , title}:TabBarIconProps) =>(
 
 
 const TabLayout = () => {
-    const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated ,user } = useAuthStore();
+    
     if(!isAuthenticated) return <Redirect href="/sign-in"  />
   return (
     <Tabs 
@@ -49,7 +50,7 @@ const TabLayout = () => {
 
       <Tabs.Screen name="cart" options={{ title: 'Cart', tabBarIcon:({focused})=>(<TabBarIcon focused={focused} title="Cart" icon={images.bag} />) }} />
 
-      <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon:({focused})=>(<TabBarIcon focused={focused} title="Profile" icon={images.person} />) }} />
+      <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon:({focused})=>(<TabBarIcon focused={focused} title="Profile" icon={{uri:user?.avatar}} />) }} />
 
 
 
