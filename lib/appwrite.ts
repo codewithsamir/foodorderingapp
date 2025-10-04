@@ -9,8 +9,13 @@ export const appwriteConfig = {
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
     databaseName: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_NAME!,
     userCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+    categoriesCollectionId:'categories',
+    menuCollectionId:'menu',
+    customizationCollecitonId:'customizations',
+    menuCustomizationCollectionId:'menu_customizations',
+    bucketId:'68de72b400328ef3cdd6'
 } 
-
+// console.log(JSON.stringify(appwriteConfig,null,2))
 
 
 
@@ -56,8 +61,8 @@ export const createUser = async ({ email, password, name }: CreateUserPrams) => 
 export const signIn = async ({ email, password }: SignInParams) => {
     try {
         const session = await account.createEmailPasswordSession(email, password);
-    } catch (e) {
-        throw new Error(e as string);
+    } catch (e:any) {
+        throw new Error(e.message as string);
     }
 }
 
@@ -93,7 +98,7 @@ export const getMenu = async ({ category, query }: GetMenuParams) => {
             appwriteConfig.menuCollectionId,
             queries,
         )
-
+        
         return menus.documents;
     } catch (e) {
         throw new Error(e as string);

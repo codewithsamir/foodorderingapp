@@ -6,7 +6,6 @@ import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, Scr
 
 export default function _layout() {
   const { isAuthenticated } = useAuthStore();
-
   if(isAuthenticated) return <Redirect href="/"  />
   return (
    <KeyboardAvoidingView className="flex-1" behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>

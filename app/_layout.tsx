@@ -26,7 +26,7 @@ Sentry.init({
 
 export default Sentry.wrap(function RootLayout() {
 
-  const { isLoading, fetchAuthenticatedUser } = useAuthStore();
+  const {user, isLoading, fetchAuthenticatedUser } = useAuthStore();
 
  const [fontsLoaded, error] = useFonts({
     "QuickSand-Bold": require('../assets/fonts/Quicksand-Bold.ttf'),
@@ -41,9 +41,18 @@ if(error) throw error;
 if(fontsLoaded) SplashScreen.hideAsync()
   },[fontsLoaded, error]);
 
-  useEffect(()=>{
+
+
+
+
+ useEffect(() => {
+  if (!user) {
     fetchAuthenticatedUser();
-  },[])
+  }
+}, [user]);
+
+
+  
 
   if(!fontsLoaded || isLoading) {
     return null;
